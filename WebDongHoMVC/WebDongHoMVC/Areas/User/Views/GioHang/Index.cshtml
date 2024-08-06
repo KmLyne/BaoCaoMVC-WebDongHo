@@ -1,0 +1,191 @@
+﻿@model IEnumerable<WebDongHoMVC.ViewModel.GioHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Giỏ hàng</h2>
+@if (Model == null || !Model.Any())
+{
+    <p>Giỏ hàng của bạn đang trống.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Hình ảnh</th>
+                <th>Tên sản phẩm</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Tổng giá</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="@Url.Content("~/HinhAnh/" + item.HinhAnh)" alt="Hình ảnh sản phẩm" style="width: 100px; height: auto;" />
+                    </td>
+                    <td>@item.TenSanPham</td>
+                    <td>@item.Gia</td>
+                    <td>
+                        @using (Html.BeginForm("CapNhatGioHang", "GioHang", FormMethod.Post))
+                        {
+                            @Html.HiddenFor(modelItem => item.MaSanPham, new { name = "id" })
+                            <input type="number" name="quantity" value="@item.SoLuong" min="1" class="form-control" />
+                            <input type="submit" value="Cập nhật" class="btn btn-primary" />
+                        }
+                    </td>
+                    <td>@item.ThanhTien</td>
+                    <td>
+                        @using (Html.BeginForm("XoaGioHang", "GioHang", FormMethod.Post))
+                        {
+                            @Html.Hidden("id", item.MaSanPham)
+                            <input type="submit" value="Xóa" class="btn btn-danger" />
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="tongtien">
+        <strong>Tổng tiền: @Model.Sum(item => item.ThanhTien)</strong>
+    </div>
+
+    @*@Html.BeginForm("XoaTatCa", "GioHang", FormMethod.Post)
+    {
+        <input type="submit" value="Xóa tất cả" class="btn btn-danger" />
+    }*@
+<div class="button-container">
+    <div class="text-left">
+        @Html.ActionLink("Tiếp tục mua sắm", "SanPhamUser", "SanPhamUser", null, new { @class = "btn btn-secondary" })
+    </div>
+
+    @Html.BeginForm("ThanhToan", "GioHang", FormMethod.Post)
+    {
+    <input type="submit" value="Thanh toán" class="btn btn-success" />
+    }
+    </div>
+    }
+  
+
+
+    <style>
+        p{
+            color:#51a0ce;
+        }
+        h2{
+            color: #0056b3;
+        }
+        /* Định dạng bảng */
+        .table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+        }
+
+            .table th, .table td {
+                padding: 0.75rem;
+                vertical-align: top;
+                border-top: 1px solid #dee2e6;
+            }
+
+            .table thead th {
+                vertical-align: bottom;
+                border-bottom: 2px solid #dee2e6;
+            }
+
+            .table tbody + tbody {
+                border-top: 2px solid #dee2e6;
+            }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f2f2f2;
+        }
+
+        /* Định dạng hình ảnh trong bảng */
+        .table img {
+            width: 100px;
+            height: auto;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+
+        /* Định dạng các nút bấm */
+        .btn {
+            border-radius: 4px;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+            }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+            color: #fff;
+        }
+
+            .btn-danger:hover {
+                background-color: #c82333;
+            }
+
+        /* Định dạng input số lượng */
+        .form-control {
+            display: inline-block;
+            width: 80px;
+        }
+
+        .tongtien {
+            color: #212529
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+            .button-container .btn {
+                margin: 0 10px;
+                padding: 10px 20px; /* Điều chỉnh padding để phù hợp với kích thước nút */
+                border: none; /* Bỏ viền nút nếu có */
+                border-radius: 4px; /* Bo góc nút */
+                cursor: pointer; /* Thay đổi con trỏ khi di chuột qua nút */
+                transition: background-color 0.3s, transform 0.3s; /* Thêm hiệu ứng chuyển màu và zoom */
+            }
+
+        .btn-secondary {
+            background-color: #6c757d; /* Màu nền nút "Tiếp tục mua sắm" */
+            color: #fff; /* Màu chữ nút "Tiếp tục mua sắm" */
+        }
+
+        .btn-success {
+            background-color: #28a745; /* Màu nền nút "Thanh toán" */
+            color: #fff; /* Màu chữ nút "Thanh toán" */
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268; /* Màu nền khi hover */
+            transform: scale(1.05); /* Tăng kích thước khi hover */
+        }
+
+        .btn-success:hover {
+            background-color: #218838; /* Màu nền khi hover */
+            transform: scale(1.05); /* Tăng kích thước khi hover */
+        }
+
+    </style>

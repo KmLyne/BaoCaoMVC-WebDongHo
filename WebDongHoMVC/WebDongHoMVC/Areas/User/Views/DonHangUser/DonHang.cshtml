@@ -1,0 +1,75 @@
+﻿
+@model IEnumerable<WebDongHoMVC.Models.DonHang>
+@{
+    ViewBag.Title = "Danh sách đơn hàng của bạn";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+}
+
+<h2>Danh sách đơn hàng của bạn</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã Đơn Hàng</th>
+            <th>Ngày đặt</th>
+            <th>Tổng tiền</th>
+            <th>Trạng thái</th>
+            <th>Chi tiết</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaDonHang</td>
+                <td>@item.NgayDangKy</td>
+                <td>@string.Format("{0:N0} VNĐ", @item.TongTien)</td>
+                <td>@item.TrangThai</td>
+                <td>
+                    <a href="@Url.Action("DonHangDetails", "DonHangUser", new { id = item.MaDonHang })" class="btn btn-info">Xem chi tiết</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<style>
+
+    /* Thêm vào tệp CSS của bạn */
+    .table {
+        font-family: 'Arial', sans-serif;
+        margin: 20px 0;
+        background-color: #fff;
+        border: 1px solid #ddd;
+    }
+
+        .table th,
+        .table td {
+            text-align: center;
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #343a40;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .table td {
+            color: #333;
+        }
+
+    .btn-info {
+        background-color: #17a2b8;
+        border: none;
+        padding: 8px 16px;
+        text-decoration: none;
+        color: #fff;
+        border-radius: 4px;
+    }
+
+        .btn-info:hover {
+            background-color: #138496;
+        }
+</style>

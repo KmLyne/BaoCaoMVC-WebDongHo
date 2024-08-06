@@ -1,0 +1,70 @@
+﻿@model PagedList.IPagedList<WebDongHoMVC.Models.DonHang>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh sách đơn hàng</h2>
+@*<a href="@Url.Action("ThemDonHang","DonHang")" class="btn btn-primary">
+        <i class="fa-solid fa-plus"></i> Thêm đơn hàng
+    </a>*@
+<div class="search-container">
+    @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Tim kiếm..." })
+    <button type="submit" class="btn btn-default">
+        <i class="fa fa-search"></i> Tìm kiếm
+    </button>
+</div>
+<div class="table-wrapper">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Mã Đơn Hàng</th>
+                <th>Tên Khách Hàng</th>
+                <th>Ngày đặt</th>
+                <th>Tổng tiền</th>
+                <th>Trạng thái</th>
+                <th>Xem</th>
+                <th>Xóa</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.MaDonHang</td>
+                    <td>@item.KhachHang.HoTen</td>
+                    <td>@item.NgayDangKy</td>
+                    <td>@string.Format("{0:N0} VNĐ", @item.TongTien)</td>
+                    <td>@item.TrangThai</td>
+                    <td>
+                        <a href="@Url.Action("XemDonHang", "DonHang", new { id = @item.MaDonHang })" class="btn-info"><i class="fa-solid fa-eye"></i></a>
+                    </td>
+
+                    <td>
+                        <a href="@Url.Action("XoaDonHang", "DonHang", new { id = @item.MaDonHang })" class="btn-delete" ;"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            }
+            @*<tr>
+                    <td colspan="3" style="text-align: right; font-weight: bold;">Tổng</td>
+                    <td style="font-weight: bold">@Model.Sum(item => item.</td>
+                </tr>*@
+        </tbody>
+    </table>
+
+    <div class="paging">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchString = ViewBag.CurrentFilter}), new PagedListRenderOptions
+        {
+            DisplayLinkToPreviousPage = PagedListDisplayMode.IfNeeded,
+            DisplayLinkToNextPage = PagedListDisplayMode.IfNeeded,
+            DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+            DisplayLinkToLastPage = PagedListDisplayMode.Always,
+            DisplayLinkToIndividualPages = true,
+            DisplayPageCountAndCurrentLocation = true,
+            MaximumPageNumbersToDisplay = 5,
+            DisplayEllipsesWhenNotShowingAllPageNumbers = true
+        })
+    </div>
+

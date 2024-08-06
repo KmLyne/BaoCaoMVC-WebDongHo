@@ -1,0 +1,84 @@
+﻿@using BCBTL.Models
+@model BCBTL.ViewModel.DonghoNamViewModel
+@{
+    ViewBag.Title = "ChiTietSP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="color: #04877f; margin: 10px">THÔNG TIN CHI TIẾT SẢN PHẨM</h2>
+
+<section class="body_detail">
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <div class="box_product">
+                    <img src="~/Image/HinhAnh/@Model.HinhAnh" alt="@Model.TenSanPham">
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="info_product">
+                    <h3 style="color: black">@Model.TenSanPham</h3>
+
+                    <h4>
+                        <span class="brand-name">Giá bán:</span>
+                        <span class="product-namegia">
+                            <strong>
+                                @Html.FormatValue(@Model.Gia, "{0:#,###}")VNĐ
+                            </strong>
+                        </span>
+                    </h4>
+
+                    <h4>
+                        <span class="brand-name">Số lượng tồn:</span>
+                        <span class="product-name">@Model.Soluongton</span>
+                    </h4>
+
+                    <h4 class="quantity-selector">
+                        <span class="brand-name">Số lượng:</span>
+                        <span class="product-namesl">
+                            <button class="decrement btn btn-light">-</button>
+                            <input type="number" value="1" min="1" class="quantity-input form-control d-inline-block" style="width: 60px;" />
+                            <button class="increment btn btn-light">+</button>
+                        </span>
+                    </h4>
+
+                    <div class="button-group mt-3">
+                        @using (Html.BeginForm("GioHang", "GioHang", new { maSP = Model.MaSanPham, quantity = 1 }, FormMethod.Post))
+                        {
+                            <button type="submit" class="btn btn-primary">Thêm vào giỏ hàng</button>
+                            <button type="submit" class="btn btn-primary">Mua</button>
+                        }
+                    </div>
+                </div>
+
+                <div class="mota mt-4">
+                    <span class="brand-name">Mô tả:</span>
+                    <p>@Model.MoTa</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const decrementButton = document.querySelector('.decrement');
+        const incrementButton = document.querySelector('.increment');
+        const quantityInput = document.querySelector('.quantity-input');
+
+        decrementButton.addEventListener('click', function () {
+            let currentValue = parseInt(quantityInput.value);
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        });
+
+        incrementButton.addEventListener('click', function () {
+            let currentValue = parseInt(quantityInput.value);
+            quantityInput.value = currentValue + 1;
+        });
+    });</script>
+
+

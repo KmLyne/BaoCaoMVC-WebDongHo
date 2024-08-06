@@ -1,0 +1,19 @@
+﻿@using TimeLess.Models
+@model List<ThuongHieu>
+
+<div class="card" style="margin-top:20px; margin-bottom:20px">
+    <div class="card-header">THƯƠNG HIỆU NỔI TIẾNG</div>
+    <div class="list-group">
+        <div class="">
+            @foreach (var item in Model)
+            {
+                <div>
+                    <a href="@Url.Action("GetThuongHieu", "QLDH", new {maTH = item.TenThuongHieu})">
+                        @item.TenThuongHieu
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+
+</div>

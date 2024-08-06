@@ -1,0 +1,160 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2></h2>
+
+<section class="overview">
+    <div class="card">
+        <i class="fa-solid fa-chart-simple"></i>
+        <h3>Doanh thu</h3>
+        <p>@String.Format("{0:n0} VNĐ", ViewBag.DoanhThu)</p>
+
+    </div>
+    <div class="card">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <h3>Tổng đơn</h3>
+        <p>@ViewBag.TongDon</p>
+    </div>
+    <div class="card">
+        <i class="fa-solid fa-users"></i>
+        <h3>Tổng khách</h3>
+        <p>@ViewBag.TongKhach</p>
+    </div>
+</section>
+
+<div class="bieudo-container">
+    <div class="bieudo">
+        <canvas id="bieudoDoanhThu"></canvas>
+    </div>
+    <div class="bieudo">
+        <canvas id="bieudoDonHang"></canvas>
+    </div>
+    <div class="bieudo">
+        <canvas id="bieudoKH"></canvas>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Biểu đồ doanh thu
+            var ctxDoanhThu = document.getElementById('bieudoDoanhThu').getContext('2d');
+            var doanhThuData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.DoanhThuTheoThang));
+            var labelsDoanhThu = doanhThuData.map(item => `Tháng ${item.Thang}`);
+            var dataDoanhThu = doanhThuData.map(item => item.DoanhThu);
+
+            new Chart(ctxDoanhThu, {
+                type: 'line',
+                data: {
+                    labels: labelsDoanhThu,
+                    datasets: [{
+                        label: 'Doanh thu',
+                        data: dataDoanhThu,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Biểu đồ đơn hàng
+            var ctxDonHang = document.getElementById('bieudoDonHang').getContext('2d');
+            var donHangData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.DonHangTheoThang));
+            var labelsDonHang = donHangData.map(item => `Tháng ${item.Thang}`);
+            var dataDonHang = donHangData.map(item => item.SoLuong);
+
+            new Chart(ctxDonHang, {
+                type: 'bar',
+                data: {
+                    labels: labelsDonHang,
+                    datasets: [{
+                        label: 'Đơn hàng',
+                        data: dataDonHang,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Biểu đồ khách hàng
+            var ctxKH = document.getElementById('bieudoKH').getContext('2d');
+            var khData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.KhachHangTheoThang));
+            var labelsKH = khData.map(item => `Tháng ${item.Thang}`);
+            var dataKH = khData.map(item => item.SoLuong);
+
+            new Chart(ctxKH, {
+                type: 'pie',
+                data: {
+                    labels: labelsKH,
+                    datasets: [{
+                        label: 'Khách hàng',
+                        data: dataKH,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}
+<style>
+    .bieudo-container {
+        display: flex;
+        justify-content: space-around;
+        margin: 0 auto;
+        max-width: 100%;
+    }
+
+    .bieudo {
+        flex: 1;
+        padding: 10px;
+        max-width: 30%;
+    }
+
+        .bieudo canvas {
+            width: 100% !important;
+            height: auto !important;
+        }
+</style>

@@ -1,0 +1,66 @@
+﻿@using BCBTL.Models
+@model List<BCBTL.ViewModel.GioViewModel>
+
+@{
+    ViewBag.Title = "Gio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Css/StyleGioHang.css" rel="stylesheet" />
+
+<div class="content">
+    <div class="bang-sanpham">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên</th>
+                    <th>Số Lượng</th>
+                    <th>Đơn Giá</th>
+                    <th>Tổng</th>
+                    <th>Xóa</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td>@(i + 1)</td>
+                            <td>
+                                <img src="@Url.Content("~/Image/HinhAnh/" + Model[i].HinhAnh)" alt="@Model[i].TenSanPham" style="width: 50px; height: 50px;">
+                                @Model[i].TenSanPham
+                            </td>
+                            <td>
+                                <form action="@Url.Action("UpdateQuantity", "Gio")" method="post" class="d-inline">
+                                    <input type="hidden" name="maSP" value="@Model[i].MaSanPham" />
+                                    <input type="number" name="quantity" value="@Model[i].SoLuong" min="1" style="width: 60px;" />
+                                    <button type="submit" class="btn btn-warning">Cập nhật</button>
+                                </form>
+                            </td>
+                            <td>@Model[i].Gia?.ToString("N0") VNĐ</td>
+                            <td>@(Model[i].SoLuong * Model[i].Gia)?.ToString("N0") VNĐ</td>
+                            <td>
+                                @using (Html.BeginForm("RemoveFromCart", "Gio", new { maSP = Model[i].MaSanPham }, FormMethod.Post))
+                                {
+                                    <button type="submit" class="btn btn-danger">Xóa</button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" class="text-center">Không có sản phẩm trong giỏ hàng.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+<div class="xuly">
+    <a href="@Url.Action("SanPham", "SanPham")">
+        <button class="muatiep"><i class="fa-solid fa-backward"></i> Tiếp Tục Mua Hàng</button>
+    </a>
+</div>

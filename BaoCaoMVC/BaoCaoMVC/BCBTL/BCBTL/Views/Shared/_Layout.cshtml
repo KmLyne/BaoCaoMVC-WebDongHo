@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="~/Css/Style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="~/Image/HinhAnh/logo.png" alt="Time">
+
+            <div class="header-right">
+                <div class="search-box">
+                    @using (Html.BeginForm("Search", "SanPham", FormMethod.Post))
+                    {
+                        <input type="text" name="keyword" placeholder="Tìm kiếm sản phẩm" />
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    }
+                </div>
+                <div class="user-account">
+                    <a href="#"><i class="fas fa-user"></i> Tài khoản</a>
+                </div>
+                <div class="giohang">
+                    <a href="@Url.Action("Gio", "Gio")"><i class="fa-solid fa-cart-shopping"></i>Giỏ hàng</a>
+                </div>
+
+            </div>
+        </div>
+        <div class="congcu">
+            <nav>
+                <ul>
+                    <li><a href="@Url.Action("TrangChu", "TrangChu")"><i class="fa-sharp fa-solid fa-house-user"></i>Trang chủ</a></li>
+
+                    <li><a href="@Url.Action("SanPham", "SanPham")"><i class="fa-solid fa-clock"></i>Sản phẩm</a></li>
+                    <li><a href="@Url.Action("DonghoNam", "DonghoNam")"><i class="fa-solid fa-user-tie"></i>Đồng hồ nam</a></li>
+                    <li><a href="@Url.Action("DonghoNu", "DonghoNu")"><i class="fa-solid fa-user-astronaut"></i>Đồng hồ nữ</a></li>
+                    <li><a href="@Url.Action("TinTuc", "TinTuc")"><i class="fa-solid fa-newspaper"></i></i></a>Tin tức</li>
+                    <li><a href="@Url.Action("LienHe", "LienHe")"><i class="fa-solid fa-phone"></i></i></i></a>Liên hệ</li>
+                </ul>
+            </nav>
+
+        </div>
+
+
+        <div>
+            @RenderBody()
+        </div>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <h4>VỀ WATCHSTORE.VN</h4>
+                        <ul>
+                            <li>Giới thiệu về WatchStore</li>
+                            <li>Phản ánh - Khiếu nại</li>
+                            <li>Chứng nhận đại lý</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <h4>CHÍNH SÁCH CHUNG</h4>
+                        <ul>
+                            <li>Điều khoản thanh toán</li>
+                            <li>Chính sách bảo hành</li>
+                            <li>Chính sách bảo mật</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <h4>CỬA HÀNG HÀ NỘI</h4>
+                        <p>97 Trần Đại Nghĩa, HBT, Hà Nội<br>Mở cửa: 8h30 - 22h30 | chỉ dương</p>
+                        <p>58 Trần Đăng Ninh, Cầu Giấy, Hà Nội<br>Mở cửa: 8h30 - 22h00 | chỉ dương</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h4>LIÊN HỆ HỖ TRỢ</h4>
+                        <p>Hotline: 1. 093 189 2222<br>Hotline: 2. 097 189 3333<br>Hotline: 3. 096 139 5555</p>
+                        <p>Email: watchstore.donghotat@gmail.com</p>
+                    </div>
+                </div>
+                <hr class="separator">
+                <div class="cuoi">
+                    ©2020-2024 by WatchStore.vn. Hotline: 093.189.2222 / Email: info@watchstore.vn
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

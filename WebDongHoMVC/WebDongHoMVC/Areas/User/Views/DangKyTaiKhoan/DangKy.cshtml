@@ -1,0 +1,249 @@
+﻿@model WebDongHoMVC.Models.KhachHang
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký</title>
+
+    <!-- CSS -->
+    @*<link href="~/Css/StyleDK.css" rel="stylesheet" />*@
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* Google Fonts - Poppins */
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            background: #f4f4f4;
+        }
+
+        .forms {
+            max-width: 480px;
+            width: 100%;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form {
+            position: relative;
+        }
+
+        .header {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .field {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .input-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input {
+            height: 50px;
+            padding: 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 400;
+            outline: none;
+        }
+
+            .input:focus {
+                border-color: #0171d3;
+            }
+
+        .password {
+            height: 50px;
+            padding: 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 400;
+            outline: none;
+        }
+
+        .button-field {
+            margin-top: 20px;
+        }
+
+        button {
+            width: 100%;
+            height: 50px;
+            border: none;
+            background: #0171d3;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            button:hover {
+                background: #0160b3;
+            }
+
+        .form-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+            .form-link span {
+                font-size: 14px;
+                color: #333;
+            }
+
+            .form-link a {
+                color: #0171d3;
+                text-decoration: none;
+            }
+
+                .form-link a:hover {
+                    text-decoration: underline;
+                }
+
+        .line {
+            position: relative;
+            height: 1px;
+            background: #ddd;
+            margin: 20px 0;
+        }
+
+            .line::before {
+                content: 'Hoặc';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: #ffffff;
+                padding: 0 10px;
+                font-size: 14px;
+                color: #888;
+            }
+
+        .media-options {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+            .media-options a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                padding: 10px 20px;
+                font-size: 14px;
+                color: #333;
+                text-decoration: none;
+                transition: background-color 0.3s ease;
+            }
+
+                .media-options a:hover {
+                    background-color: #f4f4f4;
+                }
+
+        .google-img {
+            height: 20px;
+            width: 20px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <section class="container forms">
+        <!-- Signup Form -->
+        <div class="form signup">
+            <div class="form-content">
+                <header>Đăng ký</header>
+                @using (Html.BeginForm("DangKy", "DangKyTaiKhoan", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="field input-field">
+                        @Html.TextBoxFor(m => m.HoTen, new { @class = "input", placeholder = "Họ tên", required = "required" })
+                        @Html.ValidationMessageFor(m => m.HoTen)
+                    </div>
+
+                    <div class="field input-field">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "input", placeholder = "Email", type = "email", required = "required" })
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+
+                    <div class="field input-field">
+                        @Html.PasswordFor(m => m.MatKhau, new { @class = "password", placeholder = "Mật khẩu", required = "required" })
+                        @Html.ValidationMessageFor(m => m.MatKhau)
+                    </div>
+
+                    <div class="field input-field">
+                        @Html.TextBoxFor(m => m.DiaChi, new { @class = "input", placeholder = "Địa chỉ", required = "required" })
+                        @Html.ValidationMessageFor(m => m.DiaChi)
+                    </div>
+
+                    <div class="field input-field">
+                        @Html.TextBoxFor(m => m.SoDienThoai, new { @class = "input", placeholder = "Số điện thoại", required = "required" })
+                        @Html.ValidationMessageFor(m => m.SoDienThoai)
+                    </div>
+
+                    <div class="field button-field">
+                        <button type="submit">Đăng ký</button>
+                    </div>
+                }
+
+                <div class="form-link">
+                    <span>Đã có tài khoản? <a href="#" class="link login-link">Đăng nhập</a></span>
+                </div>
+            </div>
+
+            <div class="line"></div>
+
+            <div class="media-options">
+                @*<a href="#" class="field facebook">
+                            <i class='bx bxl-facebook facebook-icon'></i>
+                            <span>Đăng ký với Facebook</span>
+                        </a>
+                    </div>
+
+                    <div class="media-options">
+                        <a href="#" class="field google">
+                            <img src="~/HinhAnh/google.png" alt="" class="google-img">
+                            <span>Đăng ký với Google</span>
+                        </a>
+                    </div>*@
+            </div>
+    </section>
+
+
+</body>
+</html>
+

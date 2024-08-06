@@ -1,0 +1,31 @@
+﻿@using TimeLess.Models
+@model TimeLess.ViewModel.SPViewModel
+
+@{
+    ViewBag.Title = "ChiTiet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi Tiết Sản Phẩm</h2>
+
+<div class="row">
+    <div class="col-md-4 col-lg-4 -col-sm-9 col-xs-9">
+        <div>
+            <img src="@Url.Content("~/Image/Image_dongho" + Model.Anh)" />
+        </div>
+
+        <div>Giá Bán: @Model.GiaBan</div>
+    </div>
+
+    <div class="col-md-4 col-lg-4 -col-sm-9 col-xs-9">
+        <div>Tên sản phẩm: @Model.TenSP</div>
+        <div>Số lượng tồn: @Model.SoLuong</div>
+        <div>Ngày cập nhật: @Model.NgayNhap</div>
+        <div>Thương hiệu: @Model.ThuongHieu</div>
+        <div>Mô tả: @Model.MoTa</div>
+        div
+    </div>
+
+</div>
+
+

@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Store Watch</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Thay thế bằng API key của bạn -->
+    <script src="https://cdn.tiny.cloud/1/ultmvk498vcdo4m3fhmoyqwxdm37v26c5uuhf82vwb9t28vu/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    @RenderSection("Scripts", required: false)
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="logo">
+            <img src="~/HinhAnh/logo.png" alt="logo" width="160px" height="100px">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="@Url.Action("Index", "TrangChu")"><i class="fas fa-home"></i> Trang chủ</a></li>
+                <li><a href="@Url.Action("Index", "SanPham")"><i class="fa-solid fa-w"></i> Sản phẩm</a></li>
+                <li><a href="@Url.Action("Index", "DanhMucSanPham")"><i class="fa-solid fa-table"></i> Danh mục sản phẩm</a></li>
+                <li><a href="@Url.Action("Index", "DonHang")"><i class="fas fa-box"></i> Đơn hàng</a></li>
+                <li><a href="@Url.Action("Index", "KhachHang")"><i class="fas fa-users"></i> Khách hàng</a></li>
+                <li><a href="@Url.Action("Index", "TinTuc")"><i class="fas fa-newspaper"></i> Tin tức</a></li>
+                <li><a href="@Url.Action("DangXuatAdmin", "DangNhapAdmin", new { area = "Admin" })"><i class="fas fa-info-circle"></i> Đăng xuất</a></li>
+            </ul>
+        </nav>
+
+    </div>
+    <div class="main-content">
+        <div class="topbar">
+            <div class="menu">
+                <i class="fa-solid fa-bars"></i>
+                <span id="current-page"></span>
+            </div>
+            @*<div class="timkiem">
+                    <input type="text" placeholder="Tìm kiếm">
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>*@
+            <div class="right-elements">
+                <div class="user">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Admin</span>
+                </div>
+                <div class="caidat">
+                    <a href="caidat.html"><i class="fas fa-cog"></i></a>
+                </div>
+            </div>
+        </div>
+        <div>
+            @RenderBody()
+
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    // JavaScript để cập nhật tên mục
+    document.querySelectorAll('.sidebar nav a').forEach(function (menuItem) {
+        menuItem.addEventListener('click', function (event) {
+            event.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
+            document.getElementById('current-page').textContent = this.getAttribute('data-name');
+            window.location.href = this.href; // Chuyển hướng đến liên kết
+        });
+    });
+</script>
+<style>
+    .main-content {
+        padding: 20px; /* Adjust padding as needed */
+    }
+
+    .topbar {
+        display: flex;
+        justify-content: space-between; /* Distribute items evenly */
+        align-items: center; /* Center items vertically */
+        background-color: #68a7ee; /* Optional background color */
+        padding: 10px 20px; /* Adjust padding as needed */
+        border-bottom: 1px solid #e0e0e0; /* Optional border for separation */
+    }
+
+        .topbar .menu {
+            font-size: 20px; /* Adjust icon size */
+        }
+
+        .topbar .right-elements {
+            display: flex;
+            align-items: center;
+        }
+
+        .topbar .user, .topbar .caidat {
+            display: flex;
+            align-items: center;
+            margin-left: 50px; /* Space between items */
+            color: #ffffff
+        }
+        .topbar .menu{
+            color: #ffffff;
+        }
+
+            .topbar .user i, .topbar .caidat i {
+                margin-right: 8px; /* Space between icon and text */
+                font-size: 18px; /* Adjust icon size */
+            }
+
+            .topbar .user span {
+                font-size: 16px; /* Adjust text size */
+                font-weight: bold; /* Optional: make the text bold */
+                color: #ffffff
+            }
+
+            .topbar .caidat a {
+                color: #ffffff; /* Icon color */
+                font-size: 18px; /* Adjust icon size */
+                text-decoration: none; /* Remove underline */
+            }
+
+                .topbar .caidat a:hover {
+                    color: #007bff; /* Change color on hover */
+                }
+</style>

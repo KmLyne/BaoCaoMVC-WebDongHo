@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Success";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success</title>
+
+    <!-- CSS -->
+    <link href="~/Css/Success.css" rel="stylesheet" />
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <section class="success-container">
+        <div class="success-content">
+            <i class='bx bx-check-circle'></i>
+            <h1>Đặt hàng thành công!</h1>
+            <p>Cảm ơn bạn đã mua hàng. Đơn hàng của bạn đã được đặt thành công.</p>
+            <a href="~/Areas/User/Views/SanPhamUser/SanPhamUser.cshtml" class="btn btn-primary">Tiếp tục mua sắm</a>
+        </div>
+    </section>
+</body>
+</html>

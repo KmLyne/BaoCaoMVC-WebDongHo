@@ -1,0 +1,118 @@
+﻿@model WebDongHoMVC.Models.SanPham
+
+@{
+    ViewBag.Title = "Sửa sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    <script src="https://cdn.tiny.cloud/1/ultmvk498vcdo4m3fhmoyqwxdm37v26c5uuhf82vwb9t28vu/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+}
+
+@using (Html.BeginForm("SuaSanPham", "SanPham", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-container">
+        <div class="header">
+            <div class="header-content">
+                <h5>Trang chủ / Sản phẩm / <span>Sửa sản phẩm</span></h5>
+            </div>
+            <div class="buttons">
+                <a href="@Url.Action("Index", "SanPham")" class="btn btn-back">
+                    <i class="fa-solid fa-rotate-left"></i> Quay lại
+                </a>
+            </div>
+        </div>
+        <span class="mandatory">Lưu ý nhập đầy đủ các mục !</span>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    @Html.HiddenFor(model => model.MaSanPham, "Mã sản phẩm")
+                    @Html.HiddenFor(model => model.MaSanPham, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập mã đồng hồ", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.MaSanPham, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TenSanPham, "Tên sản phẩm")
+                    @Html.EditorFor(model => model.TenSanPham, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập tên đồng hồ" } })
+                    @Html.ValidationMessageFor(model => model.TenSanPham, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group full-width">
+                    @Html.LabelFor(model => model.MoTa, "Mô tả sản phẩm")
+                    @Html.TextAreaFor(model => model.MoTa, new { @class = "form-control tinymce_editor" })
+                    @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group full-width">
+                    @Html.LabelFor(model => model.HinhAnh, "Chọn hình ảnh")
+                    <input type="file" class="form-control" id="hinhanhSanPham" name="HinhAnh" onchange="previewImage(event)">
+                    <div class="preview">
+                        <img id="imagePreview" src="@Url.Content("~/HinhAnh/"+@Model.HinhAnh)" alt="Xem trước hình ảnh" style="max-width: 50%; height: auto; display: block;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MaDanhMuc, "Danh mục sản phẩm")
+                    @Html.DropDownListFor(model => model.MaDanhMuc, (SelectList)ViewBag.dmuc, "Chọn danh mục", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MaDanhMuc, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Gia, "Giá")
+                    @Html.EditorFor(model => model.Gia, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập giá đồng hồ" } })
+                    @Html.ValidationMessageFor(model => model.Gia, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SoLuong, "Số lượng")
+                    @Html.EditorFor(model => model.SoLuong, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập số lượng" } })
+                    @Html.ValidationMessageFor(model => model.SoLuong, "", new { @class = "text-danger" })
+                </div>
+                <button type="submit" class="btn btn-primary">Cập nhật sản phẩm</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('imagePreview');
+                output.src = reader.result;
+                output.style.display = 'block';
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+    @*<script>
+        let editor_config = {
+            path_absolute: "/",
+            selector: "textarea.tinymce_editor",
+            plugins: [
+                "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                "searchreplace wordcount visualblocks visualchars code fullscreen",
+                "insertdatetime media nonbreaking save table contextmenu directionality",
+                "emoticons template paste textcolor colorpicker textpattern"
+            ],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media",
+            relative_urls: false,
+            file_browser_callback: function (field_name, url, type, win) {
+                let x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+                let y = window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight;
+
+                let cmsURL = editor_config.path_absolute + 'filemanager?field_name=' + field_name;
+                if (type == 'image') {
+                    cmsURL = cmsURL + "&type=Images";
+                } else {
+                    cmsURL = cmsURL + "&type=Files";
+                }
+
+                tinyMCE.activeEditor.windowManager.open({
+                    file: cmsURL,
+                    title: 'Filemanager',
+                    width: x * 0.8,
+                    height: y * 0.8,
+                    resizable: "yes",
+                    close_previous: "no"
+                });
+            }
+        };
+
+        tinymce.init(editor_config);
+    </script>*@
+}

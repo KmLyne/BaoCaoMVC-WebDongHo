@@ -1,0 +1,36 @@
+﻿@using BCBTL.ViewModel
+@model List<BCBTL.ViewModel.DonghoNamViewModel>
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model != null && Model.Any())
+{
+    <div class="product-list">
+        <div class="row">
+            @foreach (var product in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <!-- Ensure the image path is correct -->
+                        <img src="@Url.Content($"~/Image/HinhAnh/{product.HinhAnh}")" class="card-img-top" alt="@product.TenSanPham">
+                        <div class="card-body">
+                            <h5 class="card-title">@product.TenSanPham</h5>
+                            <p class="card-text">
+                                Giá bán: <strong>
+                                    @String.Format("{0:N0}", product.Gia) VNĐ
+                                </strong>
+                            </p>
+                            <a href="@Url.Action("ChiTiet", "SanPham", new { maSP = product.MaSanPham })" class="btn btn-primary">Xem Chi Tiết</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <p>Không có sản phẩm nào phù hợp với tìm kiếm của bạn.</p>
+}

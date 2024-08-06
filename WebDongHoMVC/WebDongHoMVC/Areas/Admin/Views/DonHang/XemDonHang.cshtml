@@ -1,0 +1,84 @@
+﻿@model WebDongHoMVC.Models.DonHang
+
+@{
+    ViewBag.Title = "XemDonHang";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Thông tin Đơn Hàng</h4>
+            </div>
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>Mã Đơn Hàng</dt>
+                    <dd>@Model.MaDonHang</dd>
+
+                    <dt>Khách Hàng</dt>
+                    <dd>@Model.KhachHang.HoTen</dd>
+
+                    <dt>Ngày Đặt</dt>
+                    <dd>@Model.NgayDangKy</dd>
+
+                    <dt>Trạng Thái</dt>
+                    <dd>@Model.TrangThai</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Chi tiết Sản Phẩm</h4>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Mã Sản Phẩm</th>
+                            <th>Tên Sản Phẩm</th>
+                            <th>Số Lượng</th>
+                            <th>Giá</th>
+                            <th>Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ChiTietDonHangs)
+                        {
+                            <tr>
+                                <td>@item.MaSanPham</td>
+                                <td>@item.SanPham.TenSanPham</td>
+                                <td>@item.SoLuong</td>
+                                <td>@string.Format("{0:N0} VNĐ",@item.Gia)</td>
+                                <td>@string.Format("{0:N0} VNĐ" ,(@item.Gia * @item.SoLuong))</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="4" style="text-align: right; font-weight: bold;">Tổng</td>
+                            <td style="font-weight: bold">@string.Format("{0:N0} VNĐ",@Model.ChiTietDonHangs.Sum(item => item.Gia * item.SoLuong))</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>Cập Nhật Trạng Thái</h3>
+@using (Html.BeginForm("XemDonHang", "DonHang", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.MaDonHang)
+    <div class="form-group">
+        @Html.LabelFor(model => model.TrangThai, htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.TrangThai, (SelectList)ViewBag.TrangThaiList, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Cập Nhật" class="btn btn-primary" />
+        @Html.ActionLink("Trở về", "Index", null, new { @class = "btn btn-default" })
+    </div>
+}

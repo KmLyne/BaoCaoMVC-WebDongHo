@@ -1,0 +1,49 @@
+﻿@model IEnumerable<WebDongHoMVC.Models.TinTuc>
+
+@{
+    ViewBag.Title = "TinTuc";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tin tức</title>
+
+    <!-- CSS -->
+    <link href="~/Css/TinTuc.css" rel="stylesheet" />
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <header class="site-header">
+        <h1>Tin tức mới nhất</h1>
+    </header>
+
+    <section class="news-container">
+        @if (Model == null || !Model.Any())
+        {
+            <p>Hiện tại chưa có tin tức nào.</p>
+        }
+        else
+        {
+            foreach (var newsItem in Model)
+            {
+                <article class="news-item">
+                    <div class="news-image">
+                        <img src="@Url.Content("~/HinhAnh/" + newsItem.HinhAnh)" alt="@newsItem.TieuDe" />
+                    </div>
+                    <div class="news-content">
+                        <h2>@newsItem.TieuDe</h2>
+                        <p class="news-meta">Đăng bởi @newsItem.TacGia vào @newsItem.NgayDangKy?.ToString("dd/MM/yyyy")</p>
+                        <p>@newsItem.NoiDung</p>
+                    </div>
+                </article>
+            }
+        }
+    </section>
+</body>
+</html>

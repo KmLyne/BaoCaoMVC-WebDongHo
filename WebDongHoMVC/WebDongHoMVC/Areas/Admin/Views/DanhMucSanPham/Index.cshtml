@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh mục sản phẩm</h2>
+<a href="@Url.Action("ThemDanhMuc","DanhMucSanPham")" class="btn btn-primary">
+    <i class="fa-solid fa-plus"></i> Thêm danh mục
+</a>
+<div class="table-wrapper">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Mã Danh Mục</th>
+                <th>Tên Danh Mục</th>
+                <th>Hình Ảnh</th>
+                <th>Sửa</th>
+                <th>Xóa</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.MaDanhMuc</td>
+                    <td>@item.TenDanhMuc</td>
+                    <td>
+                        <img src="@Url.Content("~/HinhAnh/" + @item.HinhAnh)" alt="@item.TenDanhMuc" style="max-width: 100px; height: auto;" />
+                    </td>
+                    <td>
+                        <a href="@Url.Action("SuaDanhMuc", "DanhMucSanPham", new { id = @item.MaDanhMuc })" class="btn-edit"><i class="fas fa-edit"></i></a> 
+                    </td>
+       
+                    <td>
+                        <a href="@Url.Action("XoaDanhMuc", "DanhMucSanPham", new { id = @item.MaDanhMuc })" class="btn-delete" ;"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

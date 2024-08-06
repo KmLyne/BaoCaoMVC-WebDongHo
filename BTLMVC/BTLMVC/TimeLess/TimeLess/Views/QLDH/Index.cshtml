@@ -1,0 +1,37 @@
+﻿@using TimeLess.Models
+@using PagedList.Mvc
+@model PagedList.IPagedList<SanPham>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh sách đồng hồ</h2>
+<div>
+    @foreach (var item in Model)
+    {
+        <div style="width:250px; float:left; border: 1px solid gray; height:300px; margin: 17px 6px 3px 17px">
+            <div style="height:65%">
+                <a href="@Url.Action("ChiTiet", "QLDH", new {maDH = item.MaSP})" title="Xem chi tiết">
+                    <img src="~/Image/Image_dongho/@item.Anh" height="180" style="margin-top:5px" />
+                </a>
+            </div>
+            <div style="height:25%">Tên: @item.TenSP</div>
+            <div style="height:10%;border: 1px solid gray; color:blue">
+                Giá bán:<strong style="color:#6f0909">
+                    @Html.FormatValue(item.GiaBan, "{0:#,###}")VNĐ
+                </strong>
+            </div>
+        </div>
+    }
+</div>
+<div class="clearfix"></div>
+<div style="display: flex"></div>
+<div>
+    <div>
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/ @Model.PageCount
+    </div>
+    <div style="margin-left:30px">
+        @Html.PagedListPager(Model, page => Url.Action("Index", "QLDH", new { page = page }))
+    </div>
+</div>

@@ -1,0 +1,735 @@
+﻿/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+}
+
+/* Header Styles */
+.container {
+    color: rgb(251, 248, 248);
+    padding: 20px;
+}
+
+.logo {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 20px;
+}
+
+    .logo img {
+        height: 90px;
+        transform: translateX(40px);
+    }
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.search-box {
+    position: relative;
+    margin-right: 40px;
+}
+
+    .search-box input {
+        padding: 10px 40px 10px 15px;
+        border: 1px solid #000; /* Added black border */
+        border-radius: 20px;
+        width: 550px;
+        background-color: #ffffff;
+        color: rgb(0, 0, 0);
+        font-size: 14px;
+        transition: width 0.3s ease;
+    }
+
+        .search-box input:focus {
+            outline: none;
+            width: 350px;
+        }
+
+    .search-box button {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        background-color: transparent;
+        border: none;
+        color: rgb(0, 0, 0);
+        cursor: pointer;
+    }
+
+        .search-box button:hover {
+            color: rgb(0, 0, 0);
+        }
+
+    .search-box i {
+        font-size: 16px;
+    }
+
+.user-account a {
+    color: rgb(6, 6, 6);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.giohang {
+    margin-right: 35px;
+}
+
+.user-account {
+    margin-right: 35px;
+}
+
+    .user-account i {
+        margin-right: 5px;
+    }
+
+.giohang a {
+    color: rgb(6, 6, 6);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.giohang i {
+    margin-right: 5px;
+}
+
+/* Navigation Styles */
+.congcu nav {
+    background-color: #2980b9;
+    display: flex;
+    justify-content: center;
+}
+
+
+    .congcu nav ul {
+        list-style-type: none;
+        display: flex;
+    }
+
+    .congcu nav li {
+        position: relative;
+        padding: 15px 45px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: flex;
+        align-items: center;
+    }
+
+        .congcu nav li:hover {
+            background-color: #1abc9c;
+        }
+
+        .congcu nav li a {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .congcu nav li i {
+            margin-right: 8px;
+            color: #fff;
+        }
+
+        .congcu nav li:hover > .submenu {
+            display: block; /* Changed from .congcu nav li:hover .submenu */
+        }
+
+.submenu {
+    position: absolute;
+    width: 160px;
+    height: auto;
+    background-color: #2980b9;
+    box-shadow: 0 2px 5px rgba(244, 86, 86, 0.1);
+    display: none;
+    z-index: 2;
+    top: 100%;
+    left: 0;
+}
+
+    .submenu ul {
+        display: flex;
+        flex-direction: column;
+        list-style-type: none;
+        margin: 0;
+        padding: 10px;
+    }
+
+        .submenu ul li {
+            padding: 8px 0;
+        }
+
+            .submenu ul li a {
+                color: rgb(255, 255, 255);
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+
+                .submenu ul li a:hover {
+                    color: #ffffff;
+                }
+
+.congcu ul li:hover .submenu {
+    display: block;
+}
+
+/****************************slide js1***************************************/
+.slider {
+    width: 100%;
+    display: flex;
+    padding: 5px 0px;
+    overflow: hidden;
+}
+
+.sliderImg {
+    width: 100%;
+    /*animation: 5s sliderimages infinite;*/
+}
+
+.Slider_image {
+    display: flex;
+}
+
+.btn-container {
+    margin: auto;
+    width: 1px;
+}
+
+.btn {
+    padding: 10px 5px;
+    background-color: rgb(253, 197, 197);
+    font-size: 30px;
+    position: relative;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-left {
+    position: relative;
+    z-index: 5;
+}
+
+.btn-right {
+    position: relative;
+    left: -30px;
+}
+/*
+@keyframes sliderimages{
+  0%,1%,2%,3%,4%,5%,6%,7%,8%,9%,10%{
+    transform: translateX(0);
+  }
+  20%{
+    transform: translateX(-100%);
+  }
+  40%{
+    transform: translateX(-200%);
+  }
+  60%{
+    transform: translateX(-300%);
+  }
+}*/
+
+
+/****************************tt***************************************/
+.tt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2980b9;
+    padding: 15px 20px;
+}
+
+    .tt h4 {
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+    }
+/****************************Giới thiệu***************************************/
+table {
+    width: 100%;
+    border-collapse: collapse;
+    padding: 5px 0px;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    color: black;
+}
+
+    td img {
+        width: 370px;
+    }
+
+    td:first-child {
+        width: 75%;
+    }
+
+    td:last-child {
+        width: 25%;
+    }
+
+.cottrai {
+    text-align: justify;
+    margin: 0;
+}
+
+    .cottrai h3 {
+        margin-top: 0;
+        line-height: 2.0;
+    }
+
+
+    .cottrai p {
+        text-align: justify;
+        margin: 0;
+        line-height: 1.7;
+    }
+
+/*ảnh bên trái*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+    padding: 5px 0px;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    color: black;
+}
+
+.anhcotphai img {
+    width: 300px;
+}
+
+.anhcotphai:first-child {
+    width: 25%;
+}
+
+.cotphai:last-child {
+    width: 75%;
+}
+
+.cotphai {
+    text-align: justify;
+    margin: 0;
+}
+
+    .cotphai h3 {
+        margin-top: 0;
+        line-height: 2.0;
+    }
+
+    .cotphai p {
+        text-align: justify;
+        margin: 0;
+        line-height: 1.7;
+    }
+/****************************Cuối trang***************************************/
+footer {
+    background-color: #000000;
+    padding: 10px 0;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col-md-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+    padding: 0 15px;
+}
+
+    .col-md-3 h4 {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: rgb(244, 111, 34);
+    }
+
+    .col-md-3 ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+        .col-md-3 ul li {
+            margin-bottom: 10px;
+        }
+
+            .col-md-3 ul li a {
+                color: rgb(255, 255, 255);
+                text-decoration: none;
+            }
+
+                .col-md-3 ul li a:hover {
+                    color: rgb(255, 255, 255);
+                }
+
+    .col-md-3 p {
+        color: rgb(255, 255, 255);
+        margin-bottom: 10px;
+    }
+
+.separator {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.cuoi {
+    text-align: center;
+}
+/****************************Sản phẩm***************************************/
+.sanpham {
+    background-color: #1a84f5;
+    padding: 5px 25px;
+    color: rgb(8, 8, 8);
+}
+
+.spmoi {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+    .spmoi h2 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 5px;
+        text-align: center;
+        color: white;
+    }
+
+    .spmoi p {
+        font-size: 16px;
+        color: white;
+    }
+
+.sp {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.anhsp {
+    width: 18%;
+    margin-bottom: 30px;
+    background-color: white;
+    line-height: 1.5;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+    .anhsp img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+        transition: transform 0.5s ease;
+    }
+
+    .anhsp p {
+        color: rgb(244, 58, 58);
+    }
+
+.sao p {
+    color: rgb(255, 170, 0);
+}
+
+.anhsp:hover img {
+    transform: scale(1.1);
+}
+
+.anhsp .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.anhsp:hover .overlay {
+    opacity: 1;
+}
+
+.anhsp .overlay p {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.anhsp h4 {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.anhsp p {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+}
+
+    .anhsp p sup {
+        font-size: 12px;
+    }
+
+    .anhsp p:last-child a {
+        position: relative;
+        text-decoration: line-through;
+        color: #999;
+    }
+
+        .anhsp p:last-child a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            right: 0;
+            border-top: 1px solid #999;
+            transform: translateY(-50%);
+        }
+/****************************Chi Tiết***************************************/
+.body_detal {
+    padding: 35px 0;
+}
+
+.col-8 {
+    width: 35%;
+}
+
+.col-6 {
+    width: 65%;
+}
+
+.body_detal .container.row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 15px;
+    width: 100%;
+}
+
+    .body_detal .container.row .col-6 {
+        flex-basis: 50%;
+    }
+
+.box_product img {
+    width: 450px;
+    padding: 0 50px;
+}
+
+.col-6 h3 {
+    font-size: 25px;
+    padding: 25px 0;
+    color: #000;
+    margin-left: 50px;
+}
+
+.brand-name {
+    font-weight: normal;
+    color: rgb(100, 98, 98);
+    margin-left: 50px;
+    font-size: 19px;
+    line-height: 2.0;
+}
+
+.mota {
+    color: rgb(29, 29, 29);
+    line-height: 1.5;
+}
+
+    .mota p {
+        text-align: justify;
+        margin-left: 50px;
+        font-size: 19px;
+    }
+
+.product-name {
+    font-weight: bold;
+    color: #000;
+    font-size: 19px;
+}
+
+.product-namegia {
+    font-weight: bold;
+    color: rgb(185, 5, 5);
+    font-size: 19px;
+}
+/*Số lượng*/
+.quantity-selector {
+    display: flex;
+    align-items: center;
+}
+
+.product-namesl {
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+}
+
+    .product-namesl button,
+    .product-namesl input {
+        margin: 0;
+        padding: 0;
+        border: 1px solid #ccc;
+    }
+
+    .product-namesl button {
+        width: 30px;
+        height: 30px;
+        background-color: #f2f2f2;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .product-namesl input {
+        width: 50px;
+        height: 30px;
+        text-align: center;
+    }
+/*Mua*/
+.button-group {
+    display: flex;
+    margin-left: 50px;
+    padding: 8px 0;
+}
+
+
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 5px;
+}
+
+    .btn:last-child {
+        margin-right: 0;
+    }
+
+.btn-primary {
+    background-color: #f7150e;
+    color: #fff;
+    border: none;
+}
+
+    .btn-primary:hover {
+        background-color: #f7150e;
+    }
+
+.btn-secondary {
+    background-color: #0584f3;
+    color: #fff;
+    border: none;
+}
+
+    .btn-secondary:hover {
+        background-color: #0584f3;
+    }
+
+/****************************Tin Tức***************************************/
+.tintuc {
+    color: #000;
+    text-align: justify;
+}
+
+    .tintuc h3 {
+        padding: 5px 0;
+        margin-left: 20px;
+        line-height: 2.0;
+        font-size: 24px;
+    }
+
+    .tintuc p {
+        width: 93%;
+        margin-left: 50px;
+        line-height: 1.7;
+    }
+
+.anhtintuc img {
+    padding: 20px 0;
+    margin-left: 20%;
+    width: 800px;
+    height: 500px;
+}
+
+/****************************Liên Hệ***************************************/
+.cn {
+    color: #000;
+    font-size: 20px;
+}
+
+.dc {
+    color: rgb(53, 52, 52);
+    font-size: 18px;
+}
+
+.info_product_chitiet {
+    line-height: 1.5;
+}
+
+.anhlienhe {
+    width: 40%;
+}
+/****************************Danh mục***************************************/
+.danhmuc h2 {
+    color: #000;
+    text-align: center;
+    padding: 15px;
+}
+
+.danhmuc p {
+    color: #000;
+    text-align: center;
+}
+
+.watch-collection {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 20px;
+    padding: 20px;
+}
+
+.watch-item {
+    text-align: center;
+    color: #000;
+}
+
+    .watch-item img {
+        border-radius: 15px;
+        width: 100%;
+        height: 100px;
+        margin-bottom: 10px;
+    }
+
+    .watch-item h3 {
+        margin-top: 0;
+        font-size: 16px;
+    }

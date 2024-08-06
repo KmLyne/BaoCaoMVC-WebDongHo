@@ -1,0 +1,166 @@
+﻿/* Google Fonts - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background: #f4f4f4;
+}
+
+.forms {
+    max-width: 480px;
+    width: 100%;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form {
+    position: relative;
+}
+
+.header {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.field {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    height: 50px;
+    padding: 0 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 400;
+    outline: none;
+}
+
+    .input:focus {
+        border-color: #0171d3;
+    }
+
+.password {
+    height: 50px;
+    padding: 0 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 400;
+    outline: none;
+}
+
+.button-field {
+    margin-top: 20px;
+}
+
+button {
+    width: 100%;
+    height: 50px;
+    border: none;
+    background: #0171d3;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    button:hover {
+        background: #0160b3;
+    }
+
+.form-link {
+    text-align: center;
+    margin-top: 10px;
+}
+
+    .form-link span {
+        font-size: 14px;
+        color: #333;
+    }
+
+    .form-link a {
+        color: #0171d3;
+        text-decoration: none;
+    }
+
+        .form-link a:hover {
+            text-decoration: underline;
+        }
+
+.line {
+    position: relative;
+    height: 1px;
+    background: #ddd;
+    margin: 20px 0;
+}
+
+    .line::before {
+        content: 'Hoặc';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #ffffff;
+        padding: 0 10px;
+        font-size: 14px;
+        color: #888;
+    }
+
+.media-options {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+    .media-options a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        padding: 10px 20px;
+        font-size: 14px;
+        color: #333;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+        .media-options a:hover {
+            background-color: #f4f4f4;
+        }
+
+.google-img {
+    height: 20px;
+    width: 20px;
+    object-fit: cover;
+    margin-right: 10px;
+}

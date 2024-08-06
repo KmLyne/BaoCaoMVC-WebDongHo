@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh mục tin tức</h2>
+<a href="@Url.Action("ThemTinTuc","TinTuc")" class="btn btn-primary"><i class="fa-solid fa-plus"></i>Thêm tim tức</a>
+
+<div class="table-wrapper">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Mã tin tức</th>
+                <th>Hình ảnh</th>
+                <th>Tiêu đề</th>
+                <th>Nội dung</th>
+                <th>Tác giả</th>
+                <th>Ngày đăng</th>
+                <th>Sửa</th>
+                <th>Xóa</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.MaTinTuc</td>
+                    <td>
+                        <img src="@Url.Content("~/HinhAnh/" + @item.HinhAnh)" alt="@item.TieuDe" style="max-width: 100px; height: auto;" />
+                    </td>
+                    <td>@item.TieuDe</td>
+                    <td>@item.NoiDung</td>
+                    <td>@item.TacGia</td>
+                    <td>@item.NgayDangKy</td>
+                    <td>
+                        <a href="@Url.Action("SuaTinTuc", "TinTuc", new { id = @item.MaTinTuc })" class="btn-edit"><i class="fas fa-edit"></i></a>
+                    </td>
+
+                    <td>
+                        <a href="@Url.Action("XoaTinTuc", "TinTuc", new { id = @item.MaTinTuc })" class="btn-delete" ;"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

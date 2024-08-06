@@ -1,0 +1,227 @@
+﻿@model PagedList.IPagedList<WebDongHoMVC.Models.SanPham>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh sách sản phẩm</h2>
+<div class="search-and-add">
+    @using (Html.BeginForm("Index", "SanPham", FormMethod.Get, new { @class = "search-form" }))
+    {
+        <div class="search-container">
+            @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Nhập tên sản phẩm..." })
+            <button type="submit" class="btn btn-default">
+                <i class="fa fa-search"></i> Tìm kiếm
+            </button>
+        </div>
+    }
+    <a href="@Url.Action("ThemSanPham", "SanPham")" class="btn btn-primary">
+        <i class="fa-solid fa-plus"></i> Thêm sản phẩm
+    </a>
+</div>
+<!-- Liên kết sắp xếp -->
+<div class="sap_xep">
+    <a href="@Url.Action("Index", new { sapxep = ViewBag.CurrentSort == "gia_tang" ? "gia_giam" : "gia_tang", searchString = ViewBag.CurrentFilter })">
+        Sắp xếp theo giá @(ViewBag.CurrentSort == "gia_tang" ? "giảm dần" : "tăng dần")
+    </a>
+    |
+    <a href="@Url.Action("Index", new { sapxep = ViewBag.CurrentSort == "ten_giam" ? "" : "ten_giam", searchString = ViewBag.CurrentFilter })">
+        Sắp xếp theo tên @(ViewBag.CurrentSort == "ten_giam" ? "giảm dần" : "tăng dần")
+    </a>
+</div>
+<div class="table-wrapper">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Mã Sản Phẩm</th>
+                <th>Tên Sản Phẩm</th>
+                <th>Danh mục</th>
+                <th>Giá</th>
+                <th>Số Lượng</th>
+                <th>Hình Ảnh</th>
+                <th>Sửa</th>
+                <th>Xóa</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.MaSanPham</td>
+                    <td>@item.TenSanPham</td>
+                    <td>@item.DanhMuc.TenDanhMuc</td>
+                    <<td>@string.Format("{0:N0} VNĐ", item.Gia)</td>
+                    <td>@item.SoLuong</td>
+                    <td>
+                        <img src="@Url.Content("~/HinhAnh/" + @item.HinhAnh)" alt="@item.TenSanPham" style="max-width: 100px; height: auto;" />
+                    </td>
+                    <td>
+                        <a href="@Url.Action("SuaSanPham", "SanPham", new { id = @item.MaSanPham })" class="btn-edit"><i class="fas fa-edit"></i></a>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("XoaSanPham", "SanPham", new { id = @item.MaSanPham })" class="btn-delete" ;"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="paging">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchString = ViewBag.CurrentFilter, sapxep = ViewBag.CurrentSort }), new PagedListRenderOptions
+        {
+            DisplayLinkToPreviousPage = PagedListDisplayMode.IfNeeded,
+            DisplayLinkToNextPage = PagedListDisplayMode.IfNeeded,
+            DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+            DisplayLinkToLastPage = PagedListDisplayMode.Always,
+            DisplayLinkToIndividualPages = true,
+            DisplayPageCountAndCurrentLocation = true,
+            MaximumPageNumbersToDisplay = 5,
+            DisplayEllipsesWhenNotShowingAllPageNumbers = true
+        })
+    </div>
+
+</div>
+<style>
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        .table thead {
+            background-color: #8ba9ca;
+            color: #fff;
+        }
+
+        .table th, .table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            font-size: 15px;
+        }
+
+        .table th {
+            background-color: #76a4d2;
+            color: #ffffff;
+        }
+
+
+        .table tr:hover {
+            background-color: #ddd;
+        }
+
+    .btn-info {
+        background-color: #17a2b8;
+        color: #fff;
+        padding: 5px 10px;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: #fff;
+        padding: 5px 10px;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+
+        .btn-info:hover, .btn-danger:hover {
+            opacity: 0.8;
+        }
+
+    .table .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 5px 10px;
+        font-size: 12px;
+        border-radius: 4px;
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .paging .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+        .paging .pagination li {
+            margin: 0 5px;
+        }
+
+            .paging .pagination li a,
+            .paging .pagination li span {
+                padding: 10px 15px;
+                border-radius: 5px;
+                border: 1px solid #ddd;
+                color: #007bff;
+                text-decoration: none;
+            }
+
+                .paging .pagination li a:hover,
+                .paging .pagination li span:hover {
+                    background-color: #007bff;
+                    color: white;
+                }
+
+            .paging .pagination li.active a,
+            .paging .pagination li.active span {
+                background-color: #007bff;
+                color: white;
+                border-color: #007bff;
+            }
+
+    .search-and-add {
+        display: flex;
+        align-items: center; /* Căn chỉnh theo chiều dọc */
+        justify-content: space-between; /* Đẩy các phần tử đến hai đầu của container */
+        margin-bottom: 20px; /* Khoảng cách dưới container */
+    }
+
+    .search-form {
+        margin: 0; /* Loại bỏ margin của form */
+        flex-grow: 1; /* Để form chiếm không gian còn lại */
+    }
+
+    .search-container {
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Khoảng cách giữa input và button */
+    }
+
+        .search-container .form-control {
+            flex: 1; /* Để input chiếm toàn bộ không gian còn lại */
+            border-radius: 5px; /* Bo góc cho input */
+            padding: 8px 12px; /* Padding cho input */
+        }
+
+        .search-container .btn {
+            border-radius: 5px; /* Bo góc cho button */
+            padding: 8px 12px; /* Padding cho button */
+        }
+
+    .btn-default {
+        background-color: ##76a4d2; /* Màu nền cho button tìm kiếm */
+        border: 2px solid #ced4da; /* Viền của button tìm kiếm */
+        color: #7de3ec; /* Màu chữ cho button tìm kiếm */
+    }
+
+        .btn-default:hover {
+            background-color: #e2e6ea; /* Màu nền khi hover */
+        }
+
+    .btn-primary {
+        background-color: #76a4d2; /* Màu nền cho nút thêm sản phẩm */
+        border-color: #007bff; /* Viền của nút thêm sản phẩm */
+        color: #fff; /* Màu chữ cho nút thêm sản phẩm */
+        margin-left: 10px; /* Khoảng cách giữa nút thêm sản phẩm và form tìm kiếm */
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Màu nền khi hover */
+            border-color: #004085; /* Viền của nút thêm sản phẩm khi hover */
+        }
+</style>

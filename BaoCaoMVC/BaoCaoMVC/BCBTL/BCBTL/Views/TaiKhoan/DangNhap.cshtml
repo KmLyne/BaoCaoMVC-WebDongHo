@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Đăng Nhập";
+}
+<link href="~/Css/StyleDN.css" rel="stylesheet" />
+<div class="auth-box">
+    <h2>Đăng Nhập</h2>
+    @using (Html.BeginForm("DangNhap", "TaiKhoan", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            @Html.TextBox("TenDN", null, new { @class = "form-control", placeholder = "Tên đăng nhập" })
+        </div>
+        <div class="form-group">
+            @Html.Password("MatKhau", null, new { @class = "form-control", placeholder = "Mật khẩu" })
+        </div>
+
+        <a href="@Url.Action("TaiKhoan", "sanPham")">
+            <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+        </a>
+     }
+    <p><a href="#" id="toggleAuth">Đăng Ký</a></p>
+</div>
+
+<style>
+    .logo {
+        display: none;
+    }
+    .congcu {
+        display: none;
+    }
+    .col-md-3 {
+        display: none;
+    }
+    .cuoi {
+        display: none;
+       
+    }
+    .footer {
+        display: none;
+
+    }
+    .separator {
+        display: none;
+    }
+</style>
