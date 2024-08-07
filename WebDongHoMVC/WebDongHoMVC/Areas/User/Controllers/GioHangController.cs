@@ -118,19 +118,19 @@ namespace WebDongHoMVC.Areas.User.Controllers
         //    return Json(new { success = true });
         //}
 
-
         [HttpPost]
         public ActionResult XoaGioHang(int id)
         {
-            var gh = Session["GioHang"] as List<GioHang>;
-            var gioHang = gh?.SingleOrDefault(p => p.MaSanPham == id);
-            if (gioHang != null)
+            var cart = Session["GioHang"] as List<GioHang> ?? new List<GioHang>();
+            var itemToRemove = cart.FirstOrDefault(c => c.MaSanPham == id);
+            if (itemToRemove != null)
             {
-                gh.Remove(gioHang);
-                Session["GioHang"] = gh; // Cập nhật phiên
+                cart.Remove(itemToRemove);
             }
-            return Json(new { success = true });
+            Session["GioHang"] = cart;
+            return RedirectToAction("Index", "GioHang");
         }
+
 
 
         [HttpPost]

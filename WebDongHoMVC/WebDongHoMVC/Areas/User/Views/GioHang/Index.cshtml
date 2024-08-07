@@ -44,10 +44,14 @@ else
                     <td>
                         @using (Html.BeginForm("XoaGioHang", "GioHang", FormMethod.Post))
                         {
-                            @Html.Hidden("id", item.MaSanPham)
-                            <input type="submit" value="Xóa" class="btn btn-danger" />
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@item.MaSanPham" />
+                            <button type="submit" class="btn btn-danger" title="Xóa">
+                                <i class="fa fa-trash"></i>
+                            </button>
                         }
                     </td>
+
                 </tr>
             }
         </tbody>
